@@ -39,14 +39,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="oKw-Nl-Pxw">
-                                <rect key="frame" x="97" y="110" width="180" height="185"/>
+                                <rect key="frame" x="97.5" y="110" width="180" height="185"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="185" id="UyC-mZ-353"/>
                                     <constraint firstAttribute="width" constant="180" id="dLR-zW-R14"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6F-qs-sKe">
-                                <rect key="frame" x="97" y="287" width="54" height="30"/>
+                                <rect key="frame" x="97.5" y="287" width="54" height="30"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <state key="normal" title="Camera"/>
                                 <connections>
@@ -126,17 +126,17 @@
         <!--Newsfeed-->
         <scene sceneID="x6y-Jq-gzY">
             <objects>
-                <tableViewController id="Wa1-Lq-izX" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="PKn-ev-VPO">
+                <tableViewController id="Wa1-Lq-izX" customClass="FeedViewViewController" customModule="Selfigram" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" id="PKn-ev-VPO" customClass="SelfieCell">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="AAg-CU-Ry2">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" id="AAg-CU-Ry2">
+                                <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AAg-CU-Ry2" id="GhH-kg-X9j">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -151,7 +151,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bFr-DJ-9Rj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-394" y="-1457"/>
+            <point key="canvasLocation" x="-394.39999999999998" y="-1457.7211394302849"/>
         </scene>
         <!--Activities-->
         <scene sceneID="rK2-Xk-Idf">
