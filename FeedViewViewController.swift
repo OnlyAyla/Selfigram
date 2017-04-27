@@ -14,20 +14,65 @@ class FeedViewViewController: UITableViewController,
 {
 
     
-    var posts = [Post]()
+     var posts = [Post]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        let url = URL(string: "https://www.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=bfb2c7599addd4347faf17814b7ee532&tags=sunset")!
         
-        let me = User(aUsername: "Ayla", aProfileImage: UIImage(named: "Grumpy-Cat")!)
-        let post0 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 0")
-        let post1 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 1")
-        let post2 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 2")
-        let post3 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 3")
-        let post4 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 4")
         
-        posts = [post0, post1, post2, post3, post4]
+        let task = URLSession.shared.dataTask(with: url, completionHandler: {(data, response, error) -> Void in
+            
+            // convert Data to JSON
+            if let jsonUnformatted = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                
+                let json = jsonUnformatted as? [String : AnyObject]
+                let photosDictionary = json?["photos"] as? [String : AnyObject]
+                if let photosArray = photosDictionary?["photo"] as? [[String : AnyObject]]
+                    
+                    for photo in photosArray {
+                        
+                        if let farmID = photo["farm"] as? Int,
+                            let serverID = photo["server"] as? String,
+                            let photoID = photo["id"] as? String,
+                            let secret = photo["secret"] as? String {
+                            
+                            let photoURLString = "https://farm\(farmID).staticflickr.com/\(serverID)/\(photoID)_\(secret).jpg"
+                            print(photoURLString)
+                            if let photoURL = URL(string: photoURLString) {
+                                
+                                let me = User(aUsername: "Ayla", aProfileImage: UIImage(named: "Lotus")!)
+                                let post = Post(imageURL: photoURL, user: me, comment: "🌅")
+                                self.posts.append(post)
+                            }
+                        }
+                        
+                    }
+                }
+                
+            }
+            else{
+                print("error with response data")
+            }
+            
+        }
+    )
+        
+        // this is called to start (or restart, if needed) our task
+        task.resume()
+        
+        print ("outside dataTaskWithURL")
+        
+        
+        let me = User(aUsername: "Ayla", aProfileImage: UIImage(named: "Lotus")!)
+       // let post0 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 0")
+       // let post1 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 1")
+       // let post2 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 2")
+       // let post3 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 3")
+       // let post4 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 4")
+        
+       // posts = [post0, post1, post2, post3, post4]
 
 
         
@@ -53,7 +98,7 @@ class FeedViewViewController: UITableViewController,
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 6
+        return 5
     }
 
     
