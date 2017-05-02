@@ -29,7 +29,7 @@ class FeedViewViewController: UITableViewController,
                 
                 let json = jsonUnformatted as? [String : AnyObject]
                 let photosDictionary = json?["photos"] as? [String : AnyObject]
-                if let photosArray = photosDictionary?["photo"] as? [[String : AnyObject]]
+                if let photosArray = photosDictionary?["photo"] as? [[String : AnyObject]] {
                     
                     for photo in photosArray {
                         
@@ -39,25 +39,30 @@ class FeedViewViewController: UITableViewController,
                             let secret = photo["secret"] as? String {
                             
                             let photoURLString = "https://farm\(farmID).staticflickr.com/\(serverID)/\(photoID)_\(secret).jpg"
+                            
                             print(photoURLString)
+                            
                             if let photoURL = URL(string: photoURLString) {
                                 
-                                let me = User(aUsername: "Ayla", aProfileImage: UIImage(named: "Lotus")!)
+                                let me = User(username: "Ayla", profileImage: UIImage(named: "Lotus")!)
                                 let post = Post(imageURL: photoURL, user: me, comment: "🌅")
                                 self.posts.append(post)
                             }
                         }
                         
                     }
+                
+                OperationQueue.main.addOperation {
+                    self.tableView.reloadData()
                 }
                 
-            }
-            else{
+                }
+                
+            }else{
                 print("error with response data")
             }
             
-        }
-    )
+        })
         
         // this is called to start (or restart, if needed) our task
         task.resume()
@@ -65,7 +70,7 @@ class FeedViewViewController: UITableViewController,
         print ("outside dataTaskWithURL")
         
         
-        let me = User(aUsername: "Ayla", aProfileImage: UIImage(named: "Lotus")!)
+       // let me = User(username "Ayla", pprofileImageUIImage(named: "Lotus")!)
        // let post0 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 0")
        // let post1 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 1")
        // let post2 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 2")
@@ -98,7 +103,7 @@ class FeedViewViewController: UITableViewController,
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return self.posts.count
     }
 
     
@@ -106,7 +111,20 @@ class FeedViewViewController: UITableViewController,
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! SelfieCell
 
         let post = self.posts[indexPath.row]
-        cell.selfiImageView.image = post.image
+        
+        let task = URLSession.shared.downloadTask(with: post.imageURL) { (url, response, error) -> Void in
+            
+            if let imageURL = url, let imageData = try? Data(contentsOf: imageURL) {
+                OperationQueue.main.addOperation {
+                   
+                    cell.selfieImageView.image = UIImage(data: imageData)
+                }
+            }
+        }
+        
+        task.resume()
+        
+        
         cell.usernameLabel.text = post.user.username
         cell.commentLabel.text = post.comment
 
@@ -149,23 +167,23 @@ class FeedViewViewController: UITableViewController,
         // 1. When the delegate method is returned, it passes along a dictionary called info.
         //    This dictionary contains multiple things that maybe useful to us.
         //    We are getting an image from the UIImagePickerControllerOriginalImage key in that dictionary
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            
-            //2. We create a Post object from the image
-            let me = User(aUsername: "Ayla", aProfileImage: UIImage(named: "Grumpy-Cat")!)
-            let post = Post(image: image, user: me, comment: "My Selfie")
-            
+//        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+//            
+//            //2. We create a Post object from the image
+//            let me = User(aUsername: "Ayla", aProfileImage: UIImage(named: "Lotus")!)
+//            let post = Post(image: image, user: me, comment: "My Selfie")
+        
             //3. Add post to our posts array
             //    Adds it to the very top of our array
-            posts.insert(post, at: 0)
-            
-        }
-        
-        //4. We remember to dismiss the Image Picker from our screen.
-        dismiss(animated: true, completion: nil)
-        
-        //5. Now that we have added a post, reload our table
-        tableView.reloadData()
+//            posts.insert(post, at: 0)
+//            
+//        }
+//        
+//        //4. We remember to dismiss the Image Picker from our screen.
+//        dismiss(animated: true, completion: nil)
+//        
+//        //5. Now that we have added a post, reload our table
+//        tableView.reloadData()
     
         
     }

@@ -13,9 +13,9 @@ class User {
     let profileimage: UIImage
     let username: String
     
-    init(aUsername:String, aProfileImage:UIImage){
-        username = aUsername
-        profileimage = aProfileImage
+    init(username:String, profileImage:UIImage){
+        self.username = username
+        self.profileimage = profileImage
     }
 }
 

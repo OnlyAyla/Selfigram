@@ -171,7 +171,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="commentLabel" destination="hT9-D4-I9N" id="4Ey-cN-pRf"/>
-                                    <outlet property="selfiImageView" destination="fyz-m9-cG5" id="Mbu-od-vOl"/>
+                                    <outlet property="selfieImageView" destination="fyz-m9-cG5" id="gCv-R4-kJA"/>
                                     <outlet property="usernameLabel" destination="hBF-fe-f10" id="2rj-6M-MoM"/>
                                 </connections>
                             </tableViewCell>
@@ -225,7 +225,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="euF-F7-m0h" id="Vjo-1d-74g">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

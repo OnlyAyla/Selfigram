@@ -11,7 +11,8 @@ import UIKit
 class SelfieCell: UITableViewCell {
 
     
-    @IBOutlet weak var selfiImageView: UIImageView!
+    
+    @IBOutlet weak var selfieImageView: UIImageView!
     
     @IBOutlet weak var usernameLabel: UILabel!
     
