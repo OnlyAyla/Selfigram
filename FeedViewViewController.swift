@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Parse
+
 
 class FeedViewViewController: UITableViewController,
     UIImagePickerControllerDelegate,
-    UINavigationControllerDelegate
-{
+    UINavigationControllerDelegate{
 
     
      var posts = [Post]()
@@ -19,74 +20,74 @@ class FeedViewViewController: UITableViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        let url = URL(string: "https://www.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=bfb2c7599addd4347faf17814b7ee532&tags=sunset")!
-        
-        
-        let task = URLSession.shared.dataTask(with: url, completionHandler: {(data, response, error) -> Void in
-            
-            // convert Data to JSON
-            if let jsonUnformatted = try? JSONSerialization.jsonObject(with: data!, options: []) {
-                
-                let json = jsonUnformatted as? [String : AnyObject]
-                let photosDictionary = json?["photos"] as? [String : AnyObject]
-                if let photosArray = photosDictionary?["photo"] as? [[String : AnyObject]] {
-                    
-                    for photo in photosArray {
-                        
-                        if let farmID = photo["farm"] as? Int,
-                            let serverID = photo["server"] as? String,
-                            let photoID = photo["id"] as? String,
-                            let secret = photo["secret"] as? String {
-                            
-                            let photoURLString = "https://farm\(farmID).staticflickr.com/\(serverID)/\(photoID)_\(secret).jpg"
-                            
-                            print(photoURLString)
-                            
-                            if let photoURL = URL(string: photoURLString) {
-                                
-                                let me = User(username: "Ayla", profileImage: UIImage(named: "Lotus")!)
-                                let post = Post(imageURL: photoURL, user: me, comment: "🌅")
-                                self.posts.append(post)
-                            }
-                        }
-                        
-                    }
-                
-                OperationQueue.main.addOperation {
-                    self.tableView.reloadData()
-                }
-                
-                }
-                
-            }else{
-                print("error with response data")
-            }
-            
-        })
-        
-        // this is called to start (or restart, if needed) our task
-        task.resume()
-        
-        print ("outside dataTaskWithURL")
-        
-        
-       // let me = User(username "Ayla", pprofileImageUIImage(named: "Lotus")!)
-       // let post0 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 0")
-       // let post1 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 1")
-       // let post2 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 2")
-       // let post3 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 3")
-       // let post4 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 4")
-        
-       // posts = [post0, post1, post2, post3, post4]
-
-
-        
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+//        let url = URL(string: "https://www.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=bfb2c7599addd4347faf17814b7ee532&tags=sunset")!
+//        
+//        
+//        let task = URLSession.shared.dataTask(with: url, completionHandler: {(data, response, error) -> Void in
+//            
+//            // convert Data to JSON
+//            if let jsonUnformatted = try? JSONSerialization.jsonObject(with: data!, options: []) {
+//                
+//                let json = jsonUnformatted as? [String : AnyObject]
+//                let photosDictionary = json?["photos"] as? [String : AnyObject]
+//                if let photosArray = photosDictionary?["photo"] as? [[String : AnyObject]] {
+//                    
+//                    for photo in photosArray {
+//                        
+//                        if let farmID = photo["farm"] as? Int,
+//                            let serverID = photo["server"] as? String,
+//                            let photoID = photo["id"] as? String,
+//                            let secret = photo["secret"] as? String {
+//                            
+//                            let photoURLString = "https://farm\(farmID).staticflickr.com/\(serverID)/\(photoID)_\(secret).jpg"
+//                            
+//                            print(photoURLString)
+//                            
+//                            if let photoURL = URL(string: photoURLString) {
+//                                
+//                                let me = User(username: "Ayla", profileImage: UIImage(named: "Lotus")!)
+//                                let post = Post(imageURL: photoURL, user: me, comment: "🌅")
+//                                self.posts.append(post)
+//                            }
+//                        }
+//                        
+//                    }
+//                
+//                OperationQueue.main.addOperation {
+//                    self.tableView.reloadData()
+//                }
+//                
+//                }
+//                
+//            }else{
+//                print("error with response data")
+//            }
+//            
+//        })
+//        
+//        // this is called to start (or restart, if needed) our task
+//        task.resume()
+//        
+//        print ("outside dataTaskWithURL")
+//        
+//        
+//       // let me = User(username "Ayla", pprofileImageUIImage(named: "Lotus")!)
+//       // let post0 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 0")
+//       // let post1 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 1")
+//       // let post2 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 2")
+//       // let post3 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 3")
+//       // let post4 = Post(image: UIImage(named: "Grumpy-Cat")!, user: me, comment: "Grumpy Cat 4")
+//        
+//       // posts = [post0, post1, post2, post3, post4]
+//
+//
+//        
+//        
+//        // Uncomment the following line to preserve selection between presentations
+//        // self.clearsSelectionOnViewWillAppear = false
+//
+//        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+//        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,17 +113,17 @@ class FeedViewViewController: UITableViewController,
 
         let post = self.posts[indexPath.row]
         
-        let task = URLSession.shared.downloadTask(with: post.imageURL) { (url, response, error) -> Void in
-            
-            if let imageURL = url, let imageData = try? Data(contentsOf: imageURL) {
-                OperationQueue.main.addOperation {
-                   
-                    cell.selfieImageView.image = UIImage(data: imageData)
-                }
-            }
-        }
+//        let task = URLSession.shared.downloadTask(with: post.imageURL) { (url, response, error) -> Void in
+//            
+//            if let imageURL = url, let imageData = try? Data(contentsOf: imageURL) {
+//                OperationQueue.main.addOperation {
+//                   
+//                    cell.selfieImageView.image = UIImage(data: imageData)
+//                }
+//            }
+//        }
         
-        task.resume()
+//        task.resume()
         
         
         cell.usernameLabel.text = post.user.username
@@ -167,8 +168,40 @@ class FeedViewViewController: UITableViewController,
         // 1. When the delegate method is returned, it passes along a dictionary called info.
         //    This dictionary contains multiple things that maybe useful to us.
         //    We are getting an image from the UIImagePickerControllerOriginalImage key in that dictionary
-//        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            
+      
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        
+        //setting the compression quality to 90%
+        if let imageData = UIImageJPEGRepresentation(image, 0.9),
+            let imageFile = PFFile(data: imageData),
+            let user = PFUser.current(){
+
+            //2. We create a Post object from the image
+            let post = Post(image: imageFile, user: user, comment: "Lotus")
+            
+            post.saveInBackground(block: {(success, error) -> Void in
+                if success{
+                print("Post successfully saved in Parse")
+                
+                //3. Add post to our posts array, chose index 0 so that it will be added
+                // to the top of your table instead of at the bottom (default behaviour)
+                    self.posts.insert(post, at: 0)
+                    
+                //4. Now that we have added a post, updating our table
+                //  We are jusr inserting our new Post instead of relaoding our whole TableView
+                // Both methods would work, however, this gives us a cool animation for free
+                    
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    self.tableView.insertRows(at: [indexPath], with: .automatic)
+                
+                    }
+                })
+            
+            }
+        }
+
+        
+//
 //            //2. We create a Post object from the image
 //            let me = User(aUsername: "Ayla", aProfileImage: UIImage(named: "Lotus")!)
 //            let post = Post(image: image, user: me, comment: "My Selfie")
@@ -185,8 +218,6 @@ class FeedViewViewController: UITableViewController,
 //        //5. Now that we have added a post, reload our table
 //        tableView.reloadData()
     
-        
-    }
 
     
     
@@ -235,4 +266,5 @@ class FeedViewViewController: UITableViewController,
     }
     */
 
+}
 }

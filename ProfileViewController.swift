@@ -6,6 +6,7 @@
 //  Copyright © 2017 lighthouselabs. All rights reserved.
 //
 
+import Parse
 import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -55,10 +56,28 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         //2. To our imageView, we set the image property to be the image the user has chosen
         profileImageView.image = image
+     
+        // setting the compression quality to 90%
+        if let imageData = UIImageJPEGRepresentation(image, 0.9),
+            let imageFile = PFFile(data: imageData),
+            let user = PFUser.current(){
+            
+            // avatarImage is a new column in our User table
+            user["avatarImage"] = imageFile
+            user.saveInBackground(block: { (success, error) -> Void in
+                if success {
+                    // set our profileImageView to be the image we have picked
+                    let image = UIImage(data: imageData)
+                    self.profileImageView.image = image
+                }
+            })
+            
+        }
+        
         
     }
     
-    //3. We remember to dismiss the Image Picker from our screen.
+        //3. We remember to dismiss the Image Picker from our screen.
     dismiss(animated: true, completion: nil)
     
     }
@@ -79,15 +98,33 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let user = PFUser.current() {
+            usernameLabel.text = user.username
+            
+            if let imageFile = user["avatarImage"] as? PFFile {
+                
+                imageFile.getDataInBackground(block: {(data, error) -> Void in
+                    if let imageData = data {
+                        self.profileImageView.image = UIImage(data: imageData)
+                      
+                    }
+                })
+            }
+        }
     }
-    */
-
 
 }
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
