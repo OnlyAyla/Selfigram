@@ -130,6 +130,8 @@ class FeedViewViewController: UITableViewController,
 
         let post = self.posts[indexPath.row]
         
+        cell.post = post
+        
 //        let task = URLSession.shared.downloadTask(with: post.imageURL) { (url, response, error) -> Void in
 //            
 //            if let imageURL = url, let imageData = try? Data(contentsOf: imageURL) {
@@ -142,21 +144,21 @@ class FeedViewViewController: UITableViewController,
         
 //        task.resume()
         
-        cell.selfieImageView.image = nil
-        
-        let imageFile = post.image
-        imageFile.getDataInBackground(block: {(data, error) -> Void in
-        
-            if let data = data {
-            let image = UIImage(data: data)
-            cell.selfieImageView.image = image
-           
-            }
-        
-        })
-        
-        cell.usernameLabel.text = post.user.username
-        cell.commentLabel.text = post.comment
+//        cell.selfieImageView.image = nil
+//        
+//        let imageFile = post.image
+//        imageFile.getDataInBackground(block: {(data, error) -> Void in
+//        
+//            if let data = data {
+//            let image = UIImage(data: data)
+//            cell.selfieImageView.image = image
+//           
+//            }
+//        
+//        })
+//        
+//        cell.usernameLabel.text = post.user.username
+//        cell.commentLabel.text = post.comment
 
         return cell
     }

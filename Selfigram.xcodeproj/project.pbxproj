@@ -19,6 +19,7 @@
 		076521031E9C76150001FEF0 /* SelfigramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076521021E9C76150001FEF0 /* SelfigramUITests.swift */; };
 		076C71C81EA85AA300308B89 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076C71C71EA85AA300308B89 /* Users.swift */; };
 		076C71CA1EA85CE500308B89 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076C71C91EA85CE500308B89 /* Post.swift */; };
+		076E72111EC159B7005FDA16 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E72101EC159B7005FDA16 /* Activity.swift */; };
 		0770A93C1EB1826B00AF1A40 /* SelfieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0770A93B1EB1826B00AF1A40 /* SelfieCell.swift */; };
 		9C563B93968BF7312E1C2BAE /* Pods_Selfigram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7C4EB57344C6391DA0C4C /* Pods_Selfigram.framework */; };
 		FBB567EB6ED5BE9A5CA7771F /* Pods_SelfigramUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87551388DEDECF33387F6B0 /* Pods_SelfigramUITests.framework */; };
@@ -60,6 +61,7 @@
 		076521041E9C76150001FEF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		076C71C71EA85AA300308B89 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Users.swift; path = ../Users.swift; sourceTree = "<group>"; };
 		076C71C91EA85CE500308B89 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = ../Post.swift; sourceTree = "<group>"; };
+		076E72101EC159B7005FDA16 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		0770A93B1EB1826B00AF1A40 /* SelfieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfieCell.swift; sourceTree = SOURCE_ROOT; };
 		2908150C1BC10EB18AC7AEA2 /* Pods-SelfigramUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SelfigramUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SelfigramUITests/Pods-SelfigramUITests.release.xcconfig"; sourceTree = "<group>"; };
 		37F1D06763E85B4E3BEF5C7A /* Pods-SelfigramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SelfigramTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SelfigramTests/Pods-SelfigramTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				076520EB1E9C76150001FEF0 /* LaunchScreen.storyboard */,
 				076520EE1E9C76150001FEF0 /* Info.plist */,
 				0770A93B1EB1826B00AF1A40 /* SelfieCell.swift */,
+				076E72101EC159B7005FDA16 /* Activity.swift */,
 			);
 			path = Selfigram;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				0754D88A1E9F19DB000F3AB7 /* ProfileViewController.swift in Sources */,
 				076520E51E9C76150001FEF0 /* ViewController.swift in Sources */,
 				076520E31E9C76150001FEF0 /* AppDelegate.swift in Sources */,
+				076E72111EC159B7005FDA16 /* Activity.swift in Sources */,
 				076C71CA1EA85CE500308B89 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

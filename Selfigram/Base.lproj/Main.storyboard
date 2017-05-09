@@ -158,12 +158,26 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4H-f0-K44">
+                                            <rect key="frame" x="336" y="266" width="23" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="23" id="3gE-Fg-5aC"/>
+                                                <constraint firstAttribute="height" constant="20" id="hyU-Qb-xYD"/>
+                                            </constraints>
+                                            <state key="normal" image="hearts-off"/>
+                                            <state key="selected" image="hearts-on"/>
+                                            <connections>
+                                                <action selector="likeButtonClicked:" destination="AAg-CU-Ry2" eventType="touchUpInside" id="9ib-6E-iPM"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="fyz-m9-cG5" firstAttribute="top" secondItem="GhH-kg-X9j" secondAttribute="topMargin" id="372-Py-PYt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="D4H-f0-K44" secondAttribute="trailing" constant="8" id="Gub-ao-BAQ"/>
                                         <constraint firstItem="hBF-fe-f10" firstAttribute="top" secondItem="fyz-m9-cG5" secondAttribute="bottom" constant="8" id="Qk9-Fj-AqV"/>
                                         <constraint firstItem="hT9-D4-I9N" firstAttribute="leading" secondItem="GhH-kg-X9j" secondAttribute="leadingMargin" id="SuX-6S-lwN"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fyz-m9-cG5" secondAttribute="trailing" id="ZoT-lK-pTv"/>
+                                        <constraint firstItem="D4H-f0-K44" firstAttribute="top" secondItem="fyz-m9-cG5" secondAttribute="bottom" constant="8" id="a7J-dy-Re7"/>
                                         <constraint firstItem="hT9-D4-I9N" firstAttribute="top" secondItem="hBF-fe-f10" secondAttribute="bottom" constant="8" id="dfS-WU-c3o"/>
                                         <constraint firstItem="hBF-fe-f10" firstAttribute="leading" secondItem="GhH-kg-X9j" secondAttribute="leadingMargin" id="euU-Jy-dH0"/>
                                         <constraint firstItem="fyz-m9-cG5" firstAttribute="leading" secondItem="GhH-kg-X9j" secondAttribute="leadingMargin" id="z1I-fQ-XRs"/>
@@ -171,6 +185,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="commentLabel" destination="hT9-D4-I9N" id="4Ey-cN-pRf"/>
+                                    <outlet property="likeButton" destination="D4H-f0-K44" id="aAx-dq-joq"/>
                                     <outlet property="selfieImageView" destination="fyz-m9-cG5" id="gCv-R4-kJA"/>
                                     <outlet property="usernameLabel" destination="hBF-fe-f10" id="2rj-6M-MoM"/>
                                 </connections>
@@ -225,7 +240,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="euF-F7-m0h" id="Vjo-1d-74g">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -247,6 +262,8 @@
         <image name="Activities" width="25" height="25"/>
         <image name="NewsFeed" width="25" height="25"/>
         <image name="Profile" width="25" height="25"/>
+        <image name="hearts-off" width="42" height="37"/>
+        <image name="hearts-on" width="42" height="37"/>
         <image name="placeholder" width="256" height="256"/>
     </resources>
 </document>
