@@ -19,6 +19,23 @@ class FeedViewViewController: UITableViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let query = Post.query(){
+        
+            query.order(byDescending: "createdAt")
+            query.includeKey("user")
+            
+            query.findObjectsInBackground(block: { (posts, error) -> Void in
+            
+                if let posts = posts as? [Post] {
+                
+                    self.posts = posts
+                    self.tableView.reloadData()
+                
+                }
+            })
+            
+        }
     
 //        let url = URL(string: "https://www.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=bfb2c7599addd4347faf17814b7ee532&tags=sunset")!
 //        
@@ -125,6 +142,18 @@ class FeedViewViewController: UITableViewController,
         
 //        task.resume()
         
+        cell.selfieImageView.image = nil
+        
+        let imageFile = post.image
+        imageFile.getDataInBackground(block: {(data, error) -> Void in
+        
+            if let data = data {
+            let image = UIImage(data: data)
+            cell.selfieImageView.image = image
+           
+            }
+        
+        })
         
         cell.usernameLabel.text = post.user.username
         cell.commentLabel.text = post.comment
@@ -196,6 +225,8 @@ class FeedViewViewController: UITableViewController,
                 
                     }
                 })
+            
+            self.dismiss(animated: true, completion: nil)
             
             }
         }
