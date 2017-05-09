@@ -17,6 +17,22 @@ class FeedViewViewController: UITableViewController,
     
      var posts = [Post]()
 
+    @IBAction func doubleTappedSelfie(_ sender: UITapGestureRecognizer) {
+        // get the location (x,y) position on our tableView where we have clicked
+        let tapLocation = sender.location(in: tableView)
+        
+        // based on the x, y position we can get the indexPath for where we are at
+        if let indexPathAtTapLocation = tableView.indexPathForRow(at: tapLocation){
+            
+            // based on the indexPath we can get the specific cell that is being tapped
+            let cell = tableView.cellForRow(at: indexPathAtTapLocation) as! SelfieCell
+            
+            //run a method on that cell.
+            cell.tapAnimation()
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +53,8 @@ class FeedViewViewController: UITableViewController,
             
         }
     
+        
+        
 //        let url = URL(string: "https://www.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=bfb2c7599addd4347faf17814b7ee532&tags=sunset")!
 //        
 //        

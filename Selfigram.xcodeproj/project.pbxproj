@@ -17,6 +17,8 @@
 		076520ED1E9C76150001FEF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 076520EB1E9C76150001FEF0 /* LaunchScreen.storyboard */; };
 		076520F81E9C76150001FEF0 /* SelfigramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076520F71E9C76150001FEF0 /* SelfigramTests.swift */; };
 		076521031E9C76150001FEF0 /* SelfigramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076521021E9C76150001FEF0 /* SelfigramUITests.swift */; };
+		07688E621EC169410034A0C0 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07688E611EC169410034A0C0 /* ActivityViewController.swift */; };
+		07688E641EC1696B0034A0C0 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07688E631EC1696B0034A0C0 /* ActivityCell.swift */; };
 		076C71C81EA85AA300308B89 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076C71C71EA85AA300308B89 /* Users.swift */; };
 		076C71CA1EA85CE500308B89 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076C71C91EA85CE500308B89 /* Post.swift */; };
 		076E72111EC159B7005FDA16 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E72101EC159B7005FDA16 /* Activity.swift */; };
@@ -59,6 +61,8 @@
 		076520FE1E9C76150001FEF0 /* SelfigramUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelfigramUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		076521021E9C76150001FEF0 /* SelfigramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfigramUITests.swift; sourceTree = "<group>"; };
 		076521041E9C76150001FEF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07688E611EC169410034A0C0 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityViewController.swift; path = ../ActivityViewController.swift; sourceTree = "<group>"; };
+		07688E631EC1696B0034A0C0 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityCell.swift; path = ../ActivityCell.swift; sourceTree = "<group>"; };
 		076C71C71EA85AA300308B89 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Users.swift; path = ../Users.swift; sourceTree = "<group>"; };
 		076C71C91EA85CE500308B89 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = ../Post.swift; sourceTree = "<group>"; };
 		076E72101EC159B7005FDA16 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 		076520E11E9C76150001FEF0 /* Selfigram */ = {
 			isa = PBXGroup;
 			children = (
+				07688E631EC1696B0034A0C0 /* ActivityCell.swift */,
+				07688E611EC169410034A0C0 /* ActivityViewController.swift */,
 				0758A3741EAEF0AC00DB4D67 /* FeedViewViewController.swift */,
 				0754D8891E9F19DB000F3AB7 /* ProfileViewController.swift */,
 				076C71C71EA85AA300308B89 /* Users.swift */,
@@ -466,8 +472,10 @@
 			files = (
 				076C71C81EA85AA300308B89 /* Users.swift in Sources */,
 				0758A3751EAEF0AC00DB4D67 /* FeedViewViewController.swift in Sources */,
+				07688E641EC1696B0034A0C0 /* ActivityCell.swift in Sources */,
 				0770A93C1EB1826B00AF1A40 /* SelfieCell.swift in Sources */,
 				0754D88A1E9F19DB000F3AB7 /* ProfileViewController.swift in Sources */,
+				07688E621EC169410034A0C0 /* ActivityViewController.swift in Sources */,
 				076520E51E9C76150001FEF0 /* ViewController.swift in Sources */,
 				076520E31E9C76150001FEF0 /* AppDelegate.swift in Sources */,
 				076E72111EC159B7005FDA16 /* Activity.swift in Sources */,

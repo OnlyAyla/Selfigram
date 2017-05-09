@@ -132,6 +132,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" rowHeight="320" id="AAg-CU-Ry2" customClass="SelfieCell" customModule="Selfigram" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="320"/>
@@ -170,6 +171,13 @@
                                                 <action selector="likeButtonClicked:" destination="AAg-CU-Ry2" eventType="touchUpInside" id="9ib-6E-iPM"/>
                                             </connections>
                                         </button>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hearts-on" translatesAutoresizingMaskIntoConstraints="NO" id="euN-to-O71">
+                                            <rect key="frame" x="176" y="123" width="23" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="DZa-rP-Ozj"/>
+                                                <constraint firstAttribute="width" constant="23" id="Hld-6I-ojd"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="fyz-m9-cG5" firstAttribute="top" secondItem="GhH-kg-X9j" secondAttribute="topMargin" id="372-Py-PYt"/>
@@ -177,14 +185,17 @@
                                         <constraint firstItem="hBF-fe-f10" firstAttribute="top" secondItem="fyz-m9-cG5" secondAttribute="bottom" constant="8" id="Qk9-Fj-AqV"/>
                                         <constraint firstItem="hT9-D4-I9N" firstAttribute="leading" secondItem="GhH-kg-X9j" secondAttribute="leadingMargin" id="SuX-6S-lwN"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fyz-m9-cG5" secondAttribute="trailing" id="ZoT-lK-pTv"/>
+                                        <constraint firstItem="euN-to-O71" firstAttribute="centerY" secondItem="fyz-m9-cG5" secondAttribute="centerY" id="a6h-5a-f3W"/>
                                         <constraint firstItem="D4H-f0-K44" firstAttribute="top" secondItem="fyz-m9-cG5" secondAttribute="bottom" constant="8" id="a7J-dy-Re7"/>
                                         <constraint firstItem="hT9-D4-I9N" firstAttribute="top" secondItem="hBF-fe-f10" secondAttribute="bottom" constant="8" id="dfS-WU-c3o"/>
                                         <constraint firstItem="hBF-fe-f10" firstAttribute="leading" secondItem="GhH-kg-X9j" secondAttribute="leadingMargin" id="euU-Jy-dH0"/>
+                                        <constraint firstItem="euN-to-O71" firstAttribute="centerX" secondItem="fyz-m9-cG5" secondAttribute="centerX" id="vYE-at-tD7"/>
                                         <constraint firstItem="fyz-m9-cG5" firstAttribute="leading" secondItem="GhH-kg-X9j" secondAttribute="leadingMargin" id="z1I-fQ-XRs"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="commentLabel" destination="hT9-D4-I9N" id="4Ey-cN-pRf"/>
+                                    <outlet property="heartAnimationView" destination="euN-to-O71" id="bQL-Ea-aFb"/>
                                     <outlet property="likeButton" destination="D4H-f0-K44" id="aAx-dq-joq"/>
                                     <outlet property="selfieImageView" destination="fyz-m9-cG5" id="gCv-R4-kJA"/>
                                     <outlet property="usernameLabel" destination="hBF-fe-f10" id="2rj-6M-MoM"/>
@@ -194,6 +205,7 @@
                         <connections>
                             <outlet property="dataSource" destination="Wa1-Lq-izX" id="TSG-CI-UPh"/>
                             <outlet property="delegate" destination="Wa1-Lq-izX" id="txP-7P-zSY"/>
+                            <outletCollection property="gestureRecognizers" destination="wu9-a8-pYr" appends="YES" id="osq-XG-izL"/>
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Newsfeed" image="NewsFeed" id="wgf-eo-RQJ"/>
@@ -205,8 +217,19 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Ms2-qp-ACA">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refreshPulled:" destination="Wa1-Lq-izX" eventType="valueChanged" id="qls-WU-MDX"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bFr-DJ-9Rj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="wu9-a8-pYr">
+                    <connections>
+                        <action selector="doubleTappedSelfie:" destination="Wa1-Lq-izX" id="Dlx-YL-9fW"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-394.39999999999998" y="-1457.7211394302849"/>
         </scene>
@@ -230,18 +253,27 @@
         <!--Activities-->
         <scene sceneID="7Wf-YX-GEz">
             <objects>
-                <tableViewController id="c2p-mu-wzC" sceneMemberID="viewController">
+                <tableViewController id="c2p-mu-wzC" customClass="ActivityViewController" customModule="Selfigram" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="pfk-7Y-hTi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" id="euF-F7-m0h">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="activityCell" textLabel="JMc-e0-dJ8" style="IBUITableViewCellStyleDefault" id="euF-F7-m0h" customClass="ActivityCell" customModule="Selfigram" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="euF-F7-m0h" id="Vjo-1d-74g">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JMc-e0-dJ8">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -252,6 +284,12 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Activities" image="Activities" id="pYp-Jg-HGC"/>
                     <navigationItem key="navigationItem" id="AsY-rp-Iut"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="AAS-Iv-tSz">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refreshPulled:" destination="c2p-mu-wzC" eventType="valueChanged" id="eGs-OC-GDu"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="76o-Ab-V4R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
