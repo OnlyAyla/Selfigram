@@ -34,32 +34,13 @@ var activities = [Activity]()
         }
     }
 
-    func getPosts() {
-        if let query = Post.query() {
-            query.order(byDescending: "createdAt")
-            query.includeKey("user")
-            
-            query.findObjectsInBackground(block: { (posts, error) -> Void in
-                self.refreshControl?.endRefreshing()
-                if let posts = posts as? [Post]{
-                    self.posts = posts
-                    self.tableView.reloadData()
-                }
-                
-            })
-        }
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        getPosts()
         
+        navigationItem.titleView = UIImageView(image: UIImage(named: "Selfigram-logo"))
+
     }
-    
-    @IBAction func refreshPulled(sender: UIRefreshControl) {
-        getPosts()
-    }
-   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
